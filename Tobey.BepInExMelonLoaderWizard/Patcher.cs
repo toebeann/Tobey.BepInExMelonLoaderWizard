@@ -32,8 +32,6 @@ public class Patcher
     private static HWND? activeWindow;
     private static HWND ActiveWindow => activeWindow ??= PInvoke.GetActiveWindow();
 
-    private static readonly ManualLogSource logger = Logger.CreateLogSource("Tobey's BMW");
-
     public static string ResolveLinkTarget(string path)
     {
         var resolveLinkTarget = DirectoryTraversal.Method(RESOLVE_LINK_TARGET, [typeof(string), typeof(bool)]);
@@ -116,9 +114,11 @@ public class Patcher
 
     private static bool IsSymbolicLink(string path) => (new FileInfo(path).Attributes & FileAttributes.ReparsePoint) == FileAttributes.ReparsePoint;
 
-    // entry point
+    // entry point - do not rename!
     public static void Initialize()
     {
+        using var logger = Logger.CreateLogSource("Tobey's BMW");
+
         if (!PlatformHelper.Is(Platform.Windows))
         {
             logger.LogWarning("Incompatible platform detected, bailing out.");
@@ -246,6 +246,7 @@ public class Patcher
 
     private static bool MigrateMelonLoaderModFiles(IEnumerable<string> mlLoaderfolders)
     {
+        using var logger = Logger.CreateLogSource("Tobey's BMW");
         try
         {
             var mlLoaderPath = Path.Combine(Paths.GameRootPath, "MLLoader");
@@ -334,7 +335,4 @@ public class Patcher
             return false;
         }
     }
-
-    // clean up
-    public static void Finish() => logger.Dispose();
 }
