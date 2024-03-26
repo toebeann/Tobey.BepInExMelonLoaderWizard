@@ -16,6 +16,12 @@ namespace Tobey.BepInExMelonLoaderWizard;
 
 public class Patcher
 {
+    // Without the contents of this region, the patcher will not be loaded by BepInEx - do not remove!
+    #region BepInEx Patcher Contract
+    public static IEnumerable<string> TargetDLLs { get; } = [];
+    public static void Patch(AssemblyDefinition _) { }
+    #endregion
+
     private const string ENUMERATE_FILE_SYSTEM_ENTRIES = "EnumerateFileSystemEntries";
     private const string ENUMERATE_FILES = "EnumerateFiles";
     private const string RESOLVE_LINK_TARGET = "ResolveLinkTarget";
@@ -25,12 +31,6 @@ public class Patcher
 
     private static HWND? activeWindow;
     private static HWND ActiveWindow => activeWindow ??= PInvoke.GetActiveWindow();
-
-    // Without the contents of this region, the patcher will not be loaded by BepInEx - do not remove!
-    #region BepInEx Patcher Contract
-    public static IEnumerable<string> TargetDLLs { get; } = [];
-    public static void Patch(AssemblyDefinition _) { }
-    #endregion
 
     private static readonly ManualLogSource logger = Logger.CreateLogSource("Tobey's BMW");
 
