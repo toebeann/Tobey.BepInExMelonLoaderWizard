@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
+    <Version>0.2.0</Version>
+    <Product>Tobey.BepInExMelonLoaderWizard</Product>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <Target Name="Pub" AfterTargets="AfterBuild" Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+    <Exec Command="dotnet publish -p:PublishProfile=x64-self-contained --no-build" />
+    <Copy SourceFiles="$(TargetDir)publish\$(TargetName).exe" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\" />
+    <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(Product).x64.zip" Overwrite="true" />
+
+    <Exec Command="dotnet publish -p:PublishProfile=x86-self-contained" />
+    <Copy SourceFiles="$(TargetDir)..\win-x86\publish\$(TargetName).exe" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\" />
+    <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(Product).x86.zip" Overwrite="true" />
+  </Target>
+
+  <Import Project="..\Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <None Remove="NativeMethods.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="NativeMethods.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.49-beta" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

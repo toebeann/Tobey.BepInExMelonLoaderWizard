@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Tobey.BepInExMelonLoaderWizard")]
+[assembly: AssemblyTitle("Tobey.BepInExMelonLoaderWizard.MLPlugin")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5be73b38-2f81-47d2-aede-870b7b73c85e")]
+[assembly: Guid("474a4a90-13be-44bb-9151-b815ec4620cd")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -4,18 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5BE73B38-2F81-47D2-AEDE-870B7B73C85E}</ProjectGuid>
+    <ProjectGuid>{474A4A90-13BE-44BB-9151-B815EC4620CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tobey.BepInExMelonLoaderWizard</RootNamespace>
-    <AssemblyName>Tobey.BepInExMelonLoaderWizard</AssemblyName>
+    <AssemblyName>Tobey.BepInExMelonLoaderWizard.MLPlugin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <Target Name="ZipBuild" AfterTargets="AfterBuild">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\Plugins\" />
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -28,7 +28,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MelonLoader">
+      <HintPath>E:\SteamLibrary\steamapps\common\Supermarket Simulator\BepInEx\plugins\BepInEx.MelonLoader.Loader\MelonLoader.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,17 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Patcher.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="MLPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BepInEx.Core" Version="5.*" PrivateAssets="all" ExcludeAssets="runtime" />
+    <PackageReference Include="HarmonyX" Version="2.7.0" PrivateAssets="all" ExcludeAssets="runtime" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.49-beta" PrivateAssets="all" />
-    <PackageReference Include="Mono.Cecil" Version="0.10.*" PrivateAssets="all" ExcludeAssets="runtime" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="NativeMethods.txt" />
   </ItemGroup>
   <Import Project="..\Tobey.BepInExMelonLoaderWizard.DirectoryHelper\Tobey.BepInExMelonLoaderWizard.DirectoryHelper.projitems" Label="Shared" />
+  <Import Project="..\Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

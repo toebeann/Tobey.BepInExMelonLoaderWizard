@@ -10,6 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Tobey.BepInExMelonLoaderWizard.DirectoryHelper", "Tobey.BepInExMelonLoaderWizard.DirectoryHelper\Tobey.BepInExMelonLoaderWizard.DirectoryHelper.shproj", "{D5C9C95E-DC30-4FD4-9EB6-3B2CF2CBA8CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tobey.BepInExMelonLoaderWizard.MLPlugin", "Tobey.BepInExMelonLoaderWizard.MLPlugin\Tobey.BepInExMelonLoaderWizard.MLPlugin.csproj", "{474A4A90-13BE-44BB-9151-B815EC4620CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tobey.BepInExMelonLoaderWizard.MLDisabler", "Tobey.BepInExMelonLoaderWizard.MLDisabler\Tobey.BepInExMelonLoaderWizard.MLDisabler.csproj", "{7E26A9B8-7FF0-4651-B48E-B6C8F51D493B}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Tobey.BepInExMelonLoaderWizard.ProxyHelper", "Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.shproj", "{FCAAAC63-805D-44BC-B925-B5298A2F7B63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,11 +28,27 @@ Global
 		{5BE73B38-2F81-47D2-AEDE-870B7B73C85E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BE73B38-2F81-47D2-AEDE-870B7B73C85E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BE73B38-2F81-47D2-AEDE-870B7B73C85E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{474A4A90-13BE-44BB-9151-B815EC4620CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{474A4A90-13BE-44BB-9151-B815EC4620CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{474A4A90-13BE-44BB-9151-B815EC4620CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{474A4A90-13BE-44BB-9151-B815EC4620CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E26A9B8-7FF0-4651-B48E-B6C8F51D493B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E26A9B8-7FF0-4651-B48E-B6C8F51D493B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E26A9B8-7FF0-4651-B48E-B6C8F51D493B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E26A9B8-7FF0-4651-B48E-B6C8F51D493B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {040EF028-319E-49D4-9F59-92656F72FFA8}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Tobey.BepInExMelonLoaderWizard.DirectoryHelper\Tobey.BepInExMelonLoaderWizard.DirectoryHelper.projitems*{474a4a90-13be-44bb-9151-b815ec4620cd}*SharedItemsImports = 4
+		Tobey.BepInExMelonLoaderWizard.DirectoryHelper\Tobey.BepInExMelonLoaderWizard.DirectoryHelper.projitems*{5be73b38-2f81-47d2-aede-870b7b73c85e}*SharedItemsImports = 4
+		Tobey.BepInExMelonLoaderWizard.DirectoryHelper\Tobey.BepInExMelonLoaderWizard.DirectoryHelper.projitems*{d5c9c95e-dc30-4fd4-9eb6-3b2cf2cba8cf}*SharedItemsImports = 13
+		Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.projitems*{474a4a90-13be-44bb-9151-b815ec4620cd}*SharedItemsImports = 4
+		Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.projitems*{7e26a9b8-7ff0-4651-b48e-b6c8f51d493b}*SharedItemsImports = 5
+		Tobey.BepInExMelonLoaderWizard.ProxyHelper\Tobey.BepInExMelonLoaderWizard.ProxyHelper.projitems*{fcaaac63-805d-44bc-b925-b5298a2f7b63}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

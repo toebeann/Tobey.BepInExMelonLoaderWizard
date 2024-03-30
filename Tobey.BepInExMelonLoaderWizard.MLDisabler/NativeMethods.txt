@@ -1,0 +1,4 @@
+// this file is used by Microsoft's C# Win32 P/Invoke Source Generator (https://github.com/Microsoft/CsWin32)
+// to generate the P/Invoke signatures for the Windows API functions used by this project.
+
+MessageBox
