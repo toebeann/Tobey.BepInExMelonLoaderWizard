@@ -57,7 +57,7 @@ try
 
         foreach (var process in processes)
         {
-            Log($"- {process.Id} \"{process.MainModule?.FileName}\"");
+            Log($"- {process.Id}");
         }
 
         Log("Waiting for processes to exit to continue...");
