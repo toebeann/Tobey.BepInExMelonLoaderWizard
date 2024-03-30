@@ -203,8 +203,7 @@ public class Patcher
                 ActiveWindow,
                 "The following files and folders were left behind by a previous MelonLoader installation:\r\n\r\n" +
                 $"{tree}\r\n\r\n" +
-                "Would you like to permanently delete them?\r\n\r\n" +
-                "This should be safe to do as long as you have migrated your MelonLoader mod files.",
+                "Would you like to permanently delete them?",
                 "Purge MelonLoader installation?",
                 MESSAGEBOX_STYLE.MB_YESNO |
                 MESSAGEBOX_STYLE.MB_TASKMODAL |
@@ -225,7 +224,7 @@ public class Patcher
 
                     foreach (var file in melonLoaderFiles)
                     {
-                        logger.LogDebug($"Deleteing \"{file}\"...");
+                        logger.LogDebug($"Deleting \"{file}\"...");
                         File.Delete(file);
                     }
 
