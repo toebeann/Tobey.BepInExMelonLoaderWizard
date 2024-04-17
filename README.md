@@ -1,4 +1,4 @@
-﻿# Tobey's BepInEx MelonLoader Wizard 🚘
+﻿# Tobey's BepInEx MelonLoader Wizard 🧙‍♂️
 
 BMW is a BepInEx patcher which takes care of migrating a user from MelonLoader to BepInEx.
 
