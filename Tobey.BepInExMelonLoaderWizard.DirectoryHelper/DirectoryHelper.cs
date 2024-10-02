@@ -1,6 +1,8 @@
 ﻿#nullable enable
 
 using HarmonyLib;
+using MonoMod.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -100,6 +102,11 @@ internal static class DirectoryHelper
         if (!File.Exists(path))
         {
             throw new IOException();
+        }
+
+        if (!PlatformHelper.Is(Platform.Windows))
+        {
+            throw new NotSupportedException();
         }
 
         using var h = PInvoke.CreateFile(
