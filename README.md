@@ -25,6 +25,6 @@ replaced with the UnityDoorstop proxy from BepInEx, enabling BepInEx & BMW to lo
 
 -   Native Unix games are not currently supported:\
     BMW's prompts rely on Win32 API calls to display message boxes, and as such will only work with Windows games - though it
-    _should_ work for Unix users when running a Windows game through Proton or Wine etc., although this is currently untested.
+    _should_ work fine for Unix users when running a Windows game through Windows emulators such as Proton, Wine etc.
 
 -   Only BepInEx 5 is supported.
