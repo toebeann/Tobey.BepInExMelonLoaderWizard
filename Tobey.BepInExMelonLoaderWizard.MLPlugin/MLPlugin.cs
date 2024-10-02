@@ -25,16 +25,23 @@ public class MLPlugin : MelonPlugin
     private IniFile? _doorstopConfig;
     private IniFile DoorstopConfig => _doorstopConfig ??= new IniFile(Path.Combine(MelonUtils.GameDirectory, "doorstop_config"));
 
-    private string UnityDoorstop_TargetAssembly => DoorstopConfig.Read("targetAssembly", "UnityDoorstop");
+    private string UnityDoorstop_TargetAssembly => DoorstopConfig.Read("target_assembly", "General") ?? DoorstopConfig.Read("targetAssembly", "UnityDoorstop");
 
-    private bool? UnityDoorstop_Enabled => bool.TryParse(DoorstopConfig.Read("enabled", "UnityDoorstop"), out bool enabled) switch
+    private bool? UnityDoorstop_Enabled => bool.TryParse(DoorstopConfig.Read("enabled", "General") ?? DoorstopConfig.Read("enabled", "UnityDoorstop"), out bool enabled) switch
     {
         true => enabled,
         _ => null
     };
 
     private bool IsBepinexInstalled() =>
-        ProxyHelper.HasUnityDoorstopProxyDll(MelonUtils.GameDirectory) &&
+        ProxyHelper.GetInstalledProxyDlls(MelonUtils.GameDirectory).Any(path =>
+        {
+            var info = FileVersionInfo.GetVersionInfo(path);
+
+            return
+                (info.ProductName?.ToLowerInvariant() is string name && (name.Contains("neightools") || name.Contains("unitydoorstop"))) ||
+                (info.FileDescription?.ToLowerInvariant() is string description && description.Contains("unitydoorstop"));
+        }) &&
         Path.GetFileName(UnityDoorstop_TargetAssembly).StartsWith("BepInEx");
 
     private bool IsBepinexEnabled() =>
