@@ -34,14 +34,7 @@ public class MLPlugin : MelonPlugin
     };
 
     private bool IsBepinexInstalled() =>
-        ProxyHelper.GetInstalledProxyDlls(MelonUtils.GameDirectory).Any(path =>
-        {
-            var info = FileVersionInfo.GetVersionInfo(path);
-
-            return
-                (info.ProductName?.ToLowerInvariant() is string name && (name.Contains("neightools") || name.Contains("unitydoorstop"))) ||
-                (info.FileDescription?.ToLowerInvariant() is string description && description.Contains("unitydoorstop"));
-        }) &&
+        ProxyHelper.HasUnityDoorstopProxyDll(MelonUtils.GameDirectory) &&
         Path.GetFileName(UnityDoorstop_TargetAssembly).StartsWith("BepInEx");
 
     private bool IsBepinexEnabled() =>

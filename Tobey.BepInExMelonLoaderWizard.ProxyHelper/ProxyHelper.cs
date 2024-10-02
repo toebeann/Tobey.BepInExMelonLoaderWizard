@@ -21,8 +21,8 @@ internal static class ProxyHelper
         var info = FileVersionInfo.GetVersionInfo(path);
 
         return
-            (info.ProductName is string name && name.ToLowerInvariant().Contains("unitydoorstop")) ||
-            (info.FileDescription is string description && description.ToLowerInvariant().Contains("unitydoorstop"));
+            (info.ProductName?.ToLowerInvariant() is string name && (name.Contains("neightools") || name.Contains("unitydoorstop"))) ||
+            (info.FileDescription?.ToLowerInvariant() is string description && description.Contains("unitydoorstop"));
     }
 
     public static bool HasUnityDoorstopProxyDll(string gameRootPath) => GetInstalledProxyDlls(gameRootPath).Any(IsUnityDoorstopProxyDll);
