@@ -25,9 +25,18 @@ public class MLPlugin : MelonPlugin
     private IniFile? _doorstopConfig;
     private IniFile DoorstopConfig => _doorstopConfig ??= new IniFile(Path.Combine(MelonUtils.GameDirectory, "doorstop_config"));
 
-    private string UnityDoorstop_TargetAssembly => DoorstopConfig.Read("target_assembly", "General") ?? DoorstopConfig.Read("targetAssembly", "UnityDoorstop");
+    private string UnityDoorstop_TargetAssembly => DoorstopConfig.Read("target_assembly", "General") switch
+    {
+        string s when !string.IsNullOrEmpty(s) => s,
+        _ => DoorstopConfig.Read("targetAssembly", "UnityDoorstop")
+    };
 
-    private bool? UnityDoorstop_Enabled => bool.TryParse(DoorstopConfig.Read("enabled", "General") ?? DoorstopConfig.Read("enabled", "UnityDoorstop"), out bool enabled) switch
+    private bool? UnityDoorstop_Enabled => bool.TryParse(
+        DoorstopConfig.Read("enabled", "General") switch
+        {
+            string s when !string.IsNullOrEmpty(s) => s,
+            _ => DoorstopConfig.Read("enabled", "UnityDoorstop")
+        }, out bool enabled) switch
     {
         true => enabled,
         _ => null
