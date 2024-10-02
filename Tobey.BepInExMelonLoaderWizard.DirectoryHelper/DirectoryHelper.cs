@@ -16,67 +16,81 @@ internal static class DirectoryHelper
     private static Traverse? directoryTraversal;
     private static Traverse DirectoryTraversal => directoryTraversal ??= Traverse.Create(typeof(Directory));
 
+    private static T SuppressHarmonyWarnings<T>(Func<T> fn)
+    {
+        var initialFilter = HarmonyLib.Tools.Logger.ChannelFilter;
+        HarmonyLib.Tools.Logger.ChannelFilter &= ~HarmonyLib.Tools.Logger.LogChannel.Warn;
+        try
+        {
+            return fn();
+        }
+        finally
+        {
+            HarmonyLib.Tools.Logger.ChannelFilter = initialFilter;
+        }
+    }
+
     public static IEnumerable<string> EnumerateDirectories(string path) =>
-        DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path),
             _ => Directory.GetDirectories(path)
         };
 
     public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern) =>
-        DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string), typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string), typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern),
             _ => Directory.GetDirectories(path, searchPattern)
         };
 
     public static IEnumerable<string> EnumerateDirectories(string path, string searchPattern, SearchOption searchOption) =>
-        DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string), typeof(string), typeof(SearchOption)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateDirectories), [typeof(string), typeof(string), typeof(SearchOption)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern, searchOption),
             _ => Directory.GetDirectories(path, searchPattern, searchOption)
         };
 
     public static IEnumerable<string> EnumerateFiles(string path) =>
-        DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path),
             _ => Directory.GetFiles(path)
         };
 
     public static IEnumerable<string> EnumerateFiles(string path, string searchPattern) =>
-        DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string), typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string), typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern),
             _ => Directory.GetFiles(path, searchPattern)
         };
 
     public static IEnumerable<string> EnumerateFiles(string path, string searchPattern, SearchOption searchOption) =>
-        DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string), typeof(string), typeof(SearchOption)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFiles), [typeof(string), typeof(string), typeof(SearchOption)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern, searchOption),
             _ => Directory.GetFiles(path, searchPattern, searchOption)
         };
 
     public static IEnumerable<string> EnumerateFileSystemEntries(string path) =>
-        DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path),
             _ => Directory.GetFileSystemEntries(path)
         };
 
     public static IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern) =>
-        DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string), typeof(string)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string), typeof(string)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern),
             _ => Directory.GetFileSystemEntries(path, searchPattern)
         };
 
     public static IEnumerable<string> EnumerateFileSystemEntries(string path, string searchPattern, SearchOption searchOption) =>
-        DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string), typeof(string), typeof(SearchOption)]) switch
+        SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(EnumerateFileSystemEntries), [typeof(string), typeof(string), typeof(SearchOption)])) switch
         {
             Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path),
-            _ => DirectoryTraversal.Method(nameof(Directory.GetFileSystemEntries), [typeof(string), typeof(string), typeof(SearchOption)]) switch
+            _ => SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(Directory.GetFileSystemEntries), [typeof(string), typeof(string), typeof(SearchOption)])) switch
             {
                 Traverse t when t.MethodExists() => t.GetValue<IEnumerable<string>>(path, searchPattern, searchOption),
                 _ => EnumerateDirectories(path, searchPattern, searchOption).Concat(EnumerateFiles(path, searchPattern, searchOption))
@@ -87,7 +101,7 @@ internal static class DirectoryHelper
 
     public static string ResolveLinkTarget(string path)
     {
-        var resolveLinkTarget = DirectoryTraversal.Method(nameof(ResolveLinkTarget), [typeof(string), typeof(bool)]);
+        var resolveLinkTarget = SuppressHarmonyWarnings(() => DirectoryTraversal.Method(nameof(ResolveLinkTarget), [typeof(string), typeof(bool)]));
 
         if (resolveLinkTarget?.MethodExists() ?? false)
         {
