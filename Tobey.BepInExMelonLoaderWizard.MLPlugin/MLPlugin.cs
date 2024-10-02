@@ -13,7 +13,7 @@ using Windows.Win32;
 using Windows.Win32.Foundation;
 using Windows.Win32.UI.WindowsAndMessaging;
 
-[assembly: MelonInfo(typeof(Tobey.BepInExMelonLoaderWizard.MLPlugin), "Tobey's BepInEx MelonLoader Wizard", "0.2.1", "Tobey")]
+[assembly: MelonInfo(typeof(Tobey.BepInExMelonLoaderWizard.MLPlugin), "Tobey's BepInEx MelonLoader Wizard", "0.2.2", "Tobey")]
 
 namespace Tobey.BepInExMelonLoaderWizard;
 

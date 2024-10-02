@@ -10,5 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)DirectoryHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TraverseExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TraverseHelper.cs" />
   </ItemGroup>
 </Project>
